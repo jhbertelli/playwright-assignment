@@ -6,10 +6,13 @@ import { PasswordStrengthInput } from 'components/PasswordStrengthInput'
 import { pathTo } from 'constants/paths'
 import { useRegister } from 'hooks/use-register'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useTitle } from 'react-use'
 import { registerSchema, RegisterSchema } from 'schemas'
 
 export const RegisterPage = () => {
     const registerUser = useRegister()
+
+    useTitle('Cadastro')
 
     const {
         register,
