@@ -1,8 +1,9 @@
-import { PasswordInput, PasswordInputProps, Popover, Progress } from '@mantine/core'
+import { PasswordInputProps, Popover, Progress } from '@mantine/core'
 import { useEffect, useState } from 'react'
 import { PasswordRequirement } from './PasswordRequirement'
 import { requirements } from './constants'
 import { getProgressColor, getStrength } from './helpers'
+import { Form } from 'components/Form'
 
 interface PasswordStrengthInputProps extends PasswordInputProps {
     showRequirements?: boolean
@@ -21,7 +22,11 @@ export const PasswordStrengthInput = ({ showRequirements, ...rest }: PasswordStr
         <Popover opened={popoverOpened} position="bottom" width="target" transitionProps={{ transition: 'pop' }}>
             <Popover.Target>
                 <div onFocusCapture={() => setPopoverOpened(true)} onBlurCapture={() => setPopoverOpened(false)}>
-                    <PasswordInput {...rest} value={value} onChange={(event) => setValue(event.currentTarget.value)} />
+                    <Form.Input.Password
+                        {...rest}
+                        value={value}
+                        onChange={(event) => setValue(event.currentTarget.value)}
+                    />
                 </div>
             </Popover.Target>
             <Popover.Dropdown>

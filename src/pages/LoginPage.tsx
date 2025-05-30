@@ -37,8 +37,7 @@ export const LoginPage = () => {
                     withAsterisk
                 />
 
-                <Form.Input
-                    as={PasswordInput}
+                <Form.Input.Password
                     label="Senha"
                     placeholder="Insira a sua senha..."
                     {...register('password')}

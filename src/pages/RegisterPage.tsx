@@ -55,8 +55,7 @@ export const RegisterPage = () => {
                     withAsterisk
                 />
 
-                <Form.Input
-                    as={PasswordInput}
+                <Form.Input.Password
                     label="Repita sua senha"
                     placeholder="Insira novamente a sua senha..."
                     {...register('repeatPassword')}
