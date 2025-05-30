@@ -4,6 +4,7 @@ test.beforeEach(async ({ page }) => {
     await page.goto('/register')
 })
 
+// CT-004
 test('render register form', async ({ page }) => {
     await expect(page).toHaveTitle('Cadastro')
 
@@ -13,10 +14,13 @@ test('render register form', async ({ page }) => {
     await expect(page.getByRole('textbox', { name: 'Repita sua senha' })).toBeVisible()
 })
 
+// CT-005
 test('toggle password visibility', async ({ page }) => {
     const passwordInput = page.getByRole('textbox', { name: 'Senha', exact: true })
 
-    const toggleVisibilityButton = page.getByRole('button', { name: 'Mostrar/ocultar visibilidade do campo Senha' })
+    const toggleVisibilityButton = page.getByRole('button', {
+        name: 'Mostrar/ocultar visibilidade do campo Senha',
+    })
 
     await expect(passwordInput).toBeVisible()
     await expect(toggleVisibilityButton).toBeVisible()
@@ -30,6 +34,7 @@ test('toggle password visibility', async ({ page }) => {
     await expect(passwordInput).toHaveAttribute('type', 'password')
 })
 
+// CT-006
 test('toggle repeat password visibility', async ({ page }) => {
     const repeatPasswordInput = page.getByRole('textbox', { name: 'Repita sua senha' })
 
@@ -49,6 +54,7 @@ test('toggle repeat password visibility', async ({ page }) => {
     await expect(repeatPasswordInput).toHaveAttribute('type', 'password')
 })
 
+// CT-007
 test('can redirect to login page', async ({ page }) => {
     const redirectToLoginButton = page.getByRole('button', { name: 'Já possui uma conta?' })
 
@@ -58,6 +64,7 @@ test('can redirect to login page', async ({ page }) => {
     await expect(page).toHaveTitle('Login')
 })
 
+// CT-008
 test('show password requirements popover on password input focus', async ({ page }) => {
     const passwordInput = page.getByRole('textbox', { name: 'Senha', exact: true })
 
