@@ -57,3 +57,26 @@ test('can redirect to login page', async ({ page }) => {
 
     await expect(page).toHaveTitle('Login')
 })
+
+test('show password requirements popover on password input focus', async ({ page }) => {
+    const passwordInput = page.getByRole('textbox', { name: 'Senha', exact: true })
+
+    await expect(passwordInput).toBeVisible()
+
+    const numberRequirement = page.getByText(/A senha deve possuir pelo menos um número/)
+    const lowercaseRequirement = page.getByText(/A senha deve possuir pelo menos uma letra minúscula/)
+    const specialCharacterRequirement = page.getByText(/A senha deve possuir pelo menos um caractere especial/)
+    const eightCharactersRequirement = page.getByText(/A senha deve possuir pelo menos 8 caracteres/)
+
+    await expect(numberRequirement).not.toBeVisible()
+    await expect(lowercaseRequirement).not.toBeVisible()
+    await expect(specialCharacterRequirement).not.toBeVisible()
+    await expect(eightCharactersRequirement).not.toBeVisible()
+
+    await passwordInput.focus()
+
+    await expect(numberRequirement).toBeVisible()
+    await expect(lowercaseRequirement).toBeVisible()
+    await expect(specialCharacterRequirement).toBeVisible()
+    await expect(eightCharactersRequirement).toBeVisible()
+})
