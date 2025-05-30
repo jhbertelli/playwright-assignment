@@ -1,8 +1,8 @@
 import { expect, test } from '@playwright/test'
 
 test.beforeEach(async ({ page }) => {
-    await page.goto('/login');
-});
+    await page.goto('/login')
+})
 
 test('render login form', async ({ page }) => {
     await expect(page).toHaveTitle('Login')
@@ -13,17 +13,17 @@ test('render login form', async ({ page }) => {
 
 test('toggle password visibility', async ({ page }) => {
     const passwordInput = page.getByRole('textbox', { name: 'Senha' })
-    const toggleVisibilityButton = page.getByTestId('password-visibility-toggle')
+    const toggleVisibilityButton = page.getByRole('button', { name: 'Mostrar/ocultar visibilidade do campo Senha' })
 
     await expect(passwordInput).toBeVisible()
     await expect(toggleVisibilityButton).toBeVisible()
 
     await expect(passwordInput).toHaveAttribute('type', 'password')
-    
-    await toggleVisibilityButton.click();
+
+    await toggleVisibilityButton.click()
     await expect(passwordInput).toHaveAttribute('type', 'text')
-    
-    await toggleVisibilityButton.click();
+
+    await toggleVisibilityButton.click()
     await expect(passwordInput).toHaveAttribute('type', 'password')
 })
 

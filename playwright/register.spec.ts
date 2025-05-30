@@ -13,13 +13,10 @@ test('render register form', async ({ page }) => {
     await expect(page.getByRole('textbox', { name: 'Repita sua senha' })).toBeVisible()
 })
 
-test.skip('toggle password visibility', async ({ page }) => {
+test('toggle password visibility', async ({ page }) => {
     const passwordInput = page.getByRole('textbox', { name: 'Senha', exact: true })
 
-    const toggleVisibilityButton = page
-        .locator('div')
-        .filter({ hasText: /^Repita sua senha \*$/ })
-        .getByTestId('password-visibility-toggle')
+    const toggleVisibilityButton = page.getByRole('button', { name: 'Mostrar/ocultar visibilidade do campo Senha' })
 
     await expect(passwordInput).toBeVisible()
     await expect(toggleVisibilityButton).toBeVisible()
@@ -31,6 +28,25 @@ test.skip('toggle password visibility', async ({ page }) => {
 
     await toggleVisibilityButton.click()
     await expect(passwordInput).toHaveAttribute('type', 'password')
+})
+
+test('toggle repeat password visibility', async ({ page }) => {
+    const repeatPasswordInput = page.getByRole('textbox', { name: 'Repita sua senha' })
+
+    const toggleVisibilityButton = page.getByRole('button', {
+        name: 'Mostrar/ocultar visibilidade do campo Repita sua senha',
+    })
+
+    await expect(repeatPasswordInput).toBeVisible()
+    await expect(toggleVisibilityButton).toBeVisible()
+
+    await expect(repeatPasswordInput).toHaveAttribute('type', 'password')
+
+    await toggleVisibilityButton.click()
+    await expect(repeatPasswordInput).toHaveAttribute('type', 'text')
+
+    await toggleVisibilityButton.click()
+    await expect(repeatPasswordInput).toHaveAttribute('type', 'password')
 })
 
 test('can redirect to login page', async ({ page }) => {

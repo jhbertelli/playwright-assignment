@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { PasswordInput, Title } from '@mantine/core'
+import { Title } from '@mantine/core'
 import { Button } from 'components/Button'
 import { Form } from 'components/Form'
 import { PasswordStrengthInput } from 'components/PasswordStrengthInput'

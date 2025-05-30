@@ -1,8 +1,18 @@
-import { PasswordInput as MantinePasswordInput, PasswordInputProps } from '@mantine/core'
+import { PasswordInput as MantinePasswordInput, PasswordInputProps as MantinePasswordInputProps } from '@mantine/core'
+import { FieldError } from 'react-hook-form'
 
-export const PasswordInput = ({ visibilityToggleButtonProps, ...props }: PasswordInputProps) => (
+interface PasswordInputProps extends Omit<MantinePasswordInputProps, 'error'> {
+    error?: FieldError
+}
+
+export const PasswordInput = ({ visibilityToggleButtonProps, label, error, ...props }: PasswordInputProps) => (
     <MantinePasswordInput
+        label={label}
         {...props}
-        visibilityToggleButtonProps={{ 'data-testid': 'password-visibility-toggle', ...visibilityToggleButtonProps }}
+        error={error?.message}
+        visibilityToggleButtonProps={{
+            'aria-label': `Mostrar/ocultar visibilidade do campo ${label}`,
+            ...visibilityToggleButtonProps,
+        }}
     />
 )
